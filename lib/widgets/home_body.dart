@@ -12,14 +12,16 @@ class HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Center(
-        child: Padding(
-          padding: EdgeInsets.all(childrenPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ...children,
-            ],
+      child: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(childrenPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ...children,
+              ],
+            ),
           ),
         ),
       ),
