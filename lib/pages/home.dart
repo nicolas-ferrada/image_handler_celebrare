@@ -1,6 +1,8 @@
 import 'package:celebrare/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/home_body.dart';
+
 class Home extends StatelessWidget {
   const Home({super.key});
 
@@ -8,10 +10,9 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: CustomAppBar(),
-      body: SafeArea(
-        child: Center(
-          child: Text('Celebrare'),
-        ),
+      body: HomeBody(
+        childrenPadding: 8,
+        children: [],
       ),
     );
   }
