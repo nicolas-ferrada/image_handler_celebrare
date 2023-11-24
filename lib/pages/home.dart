@@ -4,6 +4,7 @@ import 'package:celebrare/styles/app_color.dart';
 import 'package:celebrare/widgets/custom_app_bar.dart';
 import 'package:celebrare/widgets/custom_container.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../widgets/display_image.dart';
@@ -22,7 +23,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),             
+      appBar: const CustomAppBar(),
       body: HomeBody(
         childrenPadding: 16,
         children: [
@@ -66,6 +67,23 @@ class _HomeState extends State<Home> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage == null) return;
     File? image = File(pickedImage.path);
-    setState(() => widgetImage = image);
+    File? finalImage = await cropImage(image: image);
+    setState(() => widgetImage = finalImage);
+  }
+
+  Future<File?> cropImage({
+    required File image,
+  }) async {
+    CroppedFile? croppedImage = await ImageCropper().cropImage(
+      sourcePath: image.path,
+      uiSettings: [
+        AndroidUiSettings(
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
+        ),
+      ],
+    );
+    if (croppedImage == null) return null;
+    return File(croppedImage.path);
   }
 }
