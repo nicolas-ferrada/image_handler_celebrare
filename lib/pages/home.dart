@@ -17,12 +17,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  XFile? widgetImage;
+  File? widgetImage;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: const CustomAppBar(),             
       body: HomeBody(
         childrenPadding: 16,
         children: [
@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
           ),
           (widgetImage != null)
               ? DisplayImage(
-                  image: File(widgetImage!.path),
+                  image: widgetImage!,
                 )
               : const SizedBox.shrink(),
         ],
@@ -62,9 +62,10 @@ class _HomeState extends State<Home> {
   }
 
   void selectNewImage() async {
-    XFile? pickedImage =
+    final XFile? pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage == null) return;
-    setState(() => widgetImage = pickedImage);
+    File? image = File(pickedImage.path);
+    setState(() => widgetImage = image);
   }
 }
