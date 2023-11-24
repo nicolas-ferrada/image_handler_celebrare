@@ -11,6 +11,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: AppColor.teal,
+      ),
       leading: exitAppIcon(),
       title: const Text('Add Image / Icon'),
       titleTextStyle: const TextStyle(color: AppColor.grey, fontSize: 24),
