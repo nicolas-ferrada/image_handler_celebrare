@@ -16,7 +16,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       leading: exitAppIcon(),
       title: const Text('Add Image / Icon'),
-      titleTextStyle: const TextStyle(color: AppColor.grey, fontSize: 24),
+      titleTextStyle: const TextStyle(
+        color: AppColor.grey,
+        fontSize: 24,
+        fontFamily: 'Sen',
+      ),
       leadingWidth: 65,
       centerTitle: true,
       elevation: 2,
