@@ -1,16 +1,22 @@
-# celebrare
+# Image Handler Celebrare
 
-A new Flutter project.
+## Technologies
+![dart](https://img.shields.io/badge/Dart-02569B?style=for-the-badge&logo=dart&logoColor=0175C2&labelColor=101010)
+![flutter](https://img.shields.io/badge/Flutter-0175C2?style=for-the-badge&logo=flutter&logoColor=0175C2&labelColor=101010)
 
-## Getting Started
+## Why this project?
 
-This project is a starting point for a Flutter application.
+This project was an assignment from a selection process of a Flutter intership.
 
-A few resources to get you started if this is your first Flutter project:
+## Technical skills applied
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+#### Image handling:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Select images from gallery using [image_picker](https://pub.dev/packages/image_cropper).
+- Image modifications (cropping, rotating, scaling, etc) using [image_cropper](https://pub.dev/packages/image_cropper).
+- Custom frame images (masks) with assets using [widget_mask](https://pub.dev/packages/widget_mask).
+
+## Time
+
+This project took me around 6 hours of work.
+
