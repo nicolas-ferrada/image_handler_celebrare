@@ -4,19 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:widget_mask/widget_mask.dart';
 
 class DisplayImage extends StatelessWidget {
-  final File image;
-  final String? customShape;
-  final bool? expandsImage;
+  final File finalImage;
+  final String? customFrame;
   const DisplayImage({
     super.key,
-    required this.image,
-    this.customShape,
-    this.expandsImage,
+    required this.finalImage,
+    this.customFrame,
   });
 
   @override
   Widget build(BuildContext context) {
-    return (customShape == null) ? imageWidget() : customShapeImageWidget();
+    return (customFrame != null) ? customShapeImageWidget() : imageWidget();
   }
 
   Widget imageWidget() {
@@ -26,10 +24,8 @@ class DisplayImage extends StatelessWidget {
         height: 400,
         width: double.infinity,
         child: Image.file(
-          image,
-          fit: (expandsImage != null && expandsImage == true)
-              ? BoxFit.fill
-              : BoxFit.contain,
+          finalImage,
+          fit: (customFrame != null) ? BoxFit.fill : BoxFit.contain,
         ),
       ),
     );
@@ -40,13 +36,10 @@ class DisplayImage extends StatelessWidget {
       blendMode: BlendMode.dstATop,
       childSaveLayer: true,
       mask: Image.asset(
-        customShape!,
+        customFrame!,
         fit: BoxFit.contain,
       ),
-      child: DisplayImage(
-        image: image,
-        expandsImage: true,
-      ),
+      child: imageWidget(),
     );
   }
 }

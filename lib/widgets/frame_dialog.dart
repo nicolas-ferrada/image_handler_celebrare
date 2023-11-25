@@ -5,18 +5,18 @@ import 'package:flutter/material.dart';
 
 import 'display_image.dart';
 
-class FrameDialog extends StatefulWidget {
+class SelectFrameDialog extends StatefulWidget {
   final File image;
-  const FrameDialog({
+  const SelectFrameDialog({
     super.key,
     required this.image,
   });
 
   @override
-  State<FrameDialog> createState() => _FrameDialogState();
+  State<SelectFrameDialog> createState() => _SelectFrameDialogState();
 }
 
-class _FrameDialogState extends State<FrameDialog> {
+class _SelectFrameDialogState extends State<SelectFrameDialog> {
   late File finalImage;
   String? customShape;
 
@@ -30,8 +30,8 @@ class _FrameDialogState extends State<FrameDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       content: DisplayImage(
-        image: finalImage,
-        customShape: customShape,
+        finalImage: finalImage,
+        customFrame: customShape,
       ),
       actions: [
         Row(
@@ -124,7 +124,9 @@ class _FrameDialogState extends State<FrameDialog> {
             minimumSize: const Size(200, 50),
             backgroundColor: AppColor.teal,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context, customShape);
+          },
           child: const Text('Use this image'),
         ),
       ),

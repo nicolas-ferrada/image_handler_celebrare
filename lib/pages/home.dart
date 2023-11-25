@@ -20,6 +20,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   File? widgetImage;
+  String? customFrame;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +38,8 @@ class _HomeState extends State<Home> {
           ),
           (widgetImage != null)
               ? DisplayImage(
-                  image: widgetImage!,
-                  
+                  finalImage: widgetImage!,
+                  customFrame: customFrame,
                 )
               : const SizedBox.shrink(),
         ],
@@ -69,15 +70,18 @@ class _HomeState extends State<Home> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage == null) return;
     File? galleryImage = File(pickedImage.path);
-    File? croppedImage = await cropImage(image: galleryImage);
-    if (croppedImage == null || !context.mounted) return;
-    File? frameImage = await showDialog<File?>(
+    File? finalImage = await cropImage(image: galleryImage);
+    if (finalImage == null || !context.mounted) return;
+    String? selectedFrame = await showDialog<String?>(
       context: context,
       builder: (BuildContext context) {
-        return FrameDialog(image: croppedImage);
+        return SelectFrameDialog(image: finalImage);
       },
     );
-    setState(() => widgetImage = frameImage);
+    if (selectedFrame != null) {
+      setState(() => customFrame = selectedFrame);
+    }
+    setState(() => widgetImage = finalImage);
   }
 
   Future<File?> cropImage({
