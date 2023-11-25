@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:celebrare/styles/app_color.dart';
 import 'package:celebrare/widgets/custom_app_bar.dart';
 import 'package:celebrare/widgets/custom_container.dart';
+import 'package:celebrare/widgets/frame_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -37,6 +38,7 @@ class _HomeState extends State<Home> {
           (widgetImage != null)
               ? DisplayImage(
                   image: widgetImage!,
+                  
                 )
               : const SizedBox.shrink(),
         ],
@@ -66,9 +68,16 @@ class _HomeState extends State<Home> {
     final XFile? pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage == null) return;
-    File? image = File(pickedImage.path);
-    File? finalImage = await cropImage(image: image);
-    setState(() => widgetImage = finalImage);
+    File? galleryImage = File(pickedImage.path);
+    File? croppedImage = await cropImage(image: galleryImage);
+    if (croppedImage == null || !context.mounted) return;
+    File? frameImage = await showDialog<File?>(
+      context: context,
+      builder: (BuildContext context) {
+        return FrameDialog(image: croppedImage);
+      },
+    );
+    setState(() => widgetImage = frameImage);
   }
 
   Future<File?> cropImage({
